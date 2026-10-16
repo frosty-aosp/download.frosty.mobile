@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- It's dangerous to go alone! Take this. 🐈️ -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Frosty – Downloads</title>
+<meta name="theme-color" content="#95c7ff">
+<style>
+@font-face { font-family: "Roboto"; font-style: normal; font-weight: 400; font-display: swap; src: url(fonts/roboto-latin-400-normal.woff2) format("woff2"); }
+@font-face { font-family: "Roboto"; font-style: normal; font-weight: 500; font-display: swap; src: url(fonts/roboto-latin-500-normal.woff2) format("woff2"); }
+@font-face { font-family: "Roboto"; font-style: normal; font-weight: 700; font-display: swap; src: url(fonts/roboto-latin-700-normal.woff2) format("woff2"); }
+@font-face { font-family: "Roboto Mono"; font-style: normal; font-weight: 400; font-display: swap; src: url(fonts/roboto-mono-latin-400-normal.woff2) format("woff2"); }
+:root {
+  --primary: #4c8ef6;
+  --on-primary: #e4e8ed;
+  --accent: #00629d;           /* readable primary-tone for text/links on light surfaces */
+  --bg: #f1f4f9;
+  --surface: #ffffff;
+  --text: rgba(0,0,0,.87);
+  --text-2: rgba(0,0,0,.6);
+  --divider: rgba(0,0,0,.12);
+  --hover: rgba(0,98,157,.08);
+  --err: #b00020;
+  --e1: 0 1px 3px rgba(0,0,0,.2), 0 1px 1px rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);
+  --e4: 0 2px 4px -1px rgba(0,0,0,.2), 0 4px 5px rgba(0,0,0,.14), 0 1px 10px rgba(0,0,0,.12);
+  --e8: 0 5px 5px -3px rgba(0,0,0,.2), 0 8px 10px 1px rgba(0,0,0,.14), 0 3px 14px 2px rgba(0,0,0,.12);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --accent: #95c7ff; --bg: #121212; --surface: #1e1e1e;
+    --text: rgba(255,255,255,.87); --text-2: rgba(255,255,255,.6);
+    --divider: rgba(255,255,255,.12); --hover: rgba(149,199,255,.1); --err: #cf6679;
+  }
+}
+
+* { box-sizing: border-box; }
+html { color-scheme: light dark; }
+body { margin: 0; background: var(--bg); color: var(--text); font: 400 16px/1.5 Roboto, system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+a { color: var(--accent); }
+button { font: inherit; color: inherit; cursor: pointer; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* App bar */
+header { position: sticky; top: 0; z-index: 10; background: var(--primary); color: #ffffff; box-shadow: var(--e4); }
+.bar { max-width: 960px; margin: 0 auto; height: 64px; display: flex; align-items: center; gap: 12px; padding: 0 16px; }
+.bar h1 { margin: 0; font: 500 20px/1 Roboto, sans-serif; letter-spacing: .15px; flex: 1; }
+.icon-btn { width: 40px; height: 40px; border: 0; border-radius: 50%; background: transparent; display: grid; place-items: center; color: inherit; }
+.icon-btn:hover { background: rgba(0,49,90,.12); }
+.icon-btn svg { width: 24px; height: 24px; fill: currentColor; }
+.logo { width: 32px; height: 32px; fill: currentColor; }
+#back { display: none; }
+progress-bar { display: block; height: 4px; }
+.progress { height: 4px; background: rgba(0,49,90,.2); overflow: hidden; visibility: hidden; position: relative; }
+.progress.on { visibility: visible; }
+.progress::after { content: ""; position: absolute; inset: 0; width: 40%; background: var(--on-primary); animation: slide 1.1s infinite cubic-bezier(.4,0,.2,1); }
+@keyframes slide { from { left: -40%; } to { left: 100%; } }
+
+main { max-width: 960px; margin: 0 auto; padding: 24px 16px 64px; }
+.intro { margin: 8px 0 24px; }
+.intro h2 { font: 400 34px/1.2 Roboto, sans-serif; margin: 0 0 8px; letter-spacing: .25px; }
+.intro p { margin: 0; color: var(--text-2); max-width: 60ch; }
+
+/* Search field (filled text field) */
+.field { display: flex; align-items: center; gap: 12px; background: var(--surface); border-radius: 4px 4px 0 0; border-bottom: 2px solid var(--divider); padding: 0 16px; height: 56px; box-shadow: var(--e1); margin-bottom: 24px; transition: border-color .15s; }
+.field:focus-within { border-color: var(--accent); }
+.field svg { width: 24px; height: 24px; fill: var(--text-2); flex: none; }
+.field input { flex: 1; border: 0; background: transparent; color: var(--text); font: inherit; outline: 0; min-width: 0; }
+
+/* Device list */
+.group-title { font: 500 14px/1 Roboto, sans-serif; letter-spacing: .1px; color: var(--accent); margin: 24px 0 8px 4px; }
+.card { background: var(--surface); border-radius: 4px; box-shadow: var(--e1); overflow: hidden; }
+.item { display: flex; align-items: center; gap: 16px; width: 100%; min-height: 72px; padding: 8px 16px; border: 0; background: transparent; text-align: left; text-decoration: none; color: inherit; transition: background .15s; }
+.item + .item { border-top: 1px solid var(--divider); }
+.item:hover, .item:focus-visible { background: var(--hover); }
+.avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--primary); color: var(--on-primary); display: grid; place-items: center; font: 500 16px/1 Roboto, sans-serif; flex: none; }
+.item .t { flex: 1; min-width: 0; }
+.item .t b { display: block; font-weight: 400; }
+.item .t span { color: var(--text-2); font: 400 14px/1.4 "Roboto", monospace; }
+.chev { width: 24px; height: 24px; fill: var(--text-2); }
+.empty { text-align: center; color: var(--text-2); padding: 48px 16px; }
+
+/* Detail */
+.dev-head { display: flex; align-items: center; gap: 16px; margin: 8px 0 24px; }
+.dev-head .avatar { width: 56px; height: 56px; font-size: 22px; }
+.dev-head h2 { margin: 0; font: 400 28px/1.2 Roboto, sans-serif; }
+.dev-head code { color: var(--text-2); font: 400 14px/1 "Roboto", monospace; }
+.build { padding: 24px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+.chip { display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border-radius: 16px; background: var(--hover); color: var(--accent); font: 500 14px/1 Roboto, sans-serif; }
+.chip.main { background: var(--primary); color: var(--on-primary); }
+.build h3 { margin: 0 0 4px; font: 500 20px/1.3 Roboto, sans-serif; word-break: break-all; }
+.meta { color: var(--text-2); margin: 0 0 24px; font-size: 14px; }
+.btn { display: inline-flex; align-items: center; gap: 8px; height: 36px; padding: 0 16px; border: 0; border-radius: 4px; font: 500 14px/1 Roboto, sans-serif; letter-spacing: 1.25px; text-transform: uppercase; text-decoration: none; background: transparent; color: var(--accent); transition: background .15s, box-shadow .15s; }
+.btn:hover { background: var(--hover); }
+.btn.raised { background: var(--primary); color: var(--on-primary); box-shadow: var(--e1); height: 40px; padding: 0 20px; }
+.btn.raised:hover { box-shadow: var(--e4); filter: brightness(1.04); }
+.btn svg { width: 18px; height: 18px; fill: currentColor; }
+.actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+details { margin-top: 16px; }
+summary { cursor: pointer; color: var(--accent); font-weight: 500; font-size: 14px; padding: 4px 0; }
+.hash { display: block; margin-top: 8px; font: 400 12px/1.6 "Roboto Mono", monospace; color: var(--text-2); word-break: break-all; }
+.sub { font: 500 14px/1 Roboto, sans-serif; color: var(--text-2); margin: 32px 0 8px 4px; }
+.img-row { display: flex; align-items: center; gap: 12px; padding: 12px 16px; flex-wrap: wrap; }
+.img-row + .img-row { border-top: 1px solid var(--divider); }
+.img-row .t { flex: 1; min-width: 180px; }
+.img-row .t b { font-weight: 500; }
+.img-row .t span { display: block; color: var(--text-2); font-size: 14px; }
+.note { margin-top: 24px; color: var(--text-2); font-size: 14px; }
+.err { padding: 24px; }
+.err b { color: var(--err); }
+
+/* Snackbar */
+#snack { position: fixed; left: 50%; bottom: 24px; transform: translate(-50%, 100px); background: #323232; color: #fff; padding: 14px 16px; border-radius: 4px; box-shadow: var(--e8); font-size: 14px; transition: transform .2s cubic-bezier(.4,0,.2,1); z-index: 20; }
+#snack.show { transform: translate(-50%, 0); }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } .progress::after { animation-duration: 3s; } }
+@media (max-width: 600px) { .intro h2 { font-size: 28px; } .build { padding: 16px; } }
+</style>
+</head>
+<body>
+<header>
+  <div class="bar">
+    <button class="icon-btn" id="back" aria-label="Back to devices"><svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg></button>
+    <img class="logo" viewBox="0 0 24 24" aria-hidden="true" src="frosty-logo.svg" />
+    <h1>Frosty Downloads</h1>
+  </div>
+  <div class="progress" id="progress"></div>
+</header>
+
+<main id="app"></main>
+<div id="snack" role="status" aria-live="polite"></div>
+
+<script>
+/* Config is loaded from config.json (same folder): { "api": "...", "devices": [{ name, codename, brand }] } */
+let API = "", DEVICES = [];
+async function loadConfig() {
+  const res = await fetch("config.json", { cache: "no-cache" });
+  if (!res.ok) throw new Error(`config.json returned ${res.status}.`);
+  const c = await res.json();
+  API = c.api.endsWith("/") ? c.api : c.api + "/";
+  DEVICES = c.devices;
+}
+
+const $ = (s, el = document) => el.querySelector(s);
+const app = $("#app"), progress = $("#progress"), back = $("#back");
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const fmtSize = b => { const u = ["B","KB","MB","GB"]; let i = 0; while (b >= 1024 && i < 3) { b /= 1024; i++; } return b.toFixed(i ? 1 : 0) + " " + u[i]; };
+const chev = '<svg class="chev" viewBox="0 0 24 24"><path d="M8.59 16.59 13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>';
+const dl = '<svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>';
+
+function snack(msg) {
+  const el = $("#snack"); el.textContent = msg; el.classList.add("show");
+  clearTimeout(snack.t); snack.t = setTimeout(() => el.classList.remove("show"), 2200);
+}
+async function copy(text) {
+  try { await navigator.clipboard.writeText(text); snack("Checksum copied"); } catch { snack("Copy failed"); }
+}
+
+/* ---------- Device list ---------- */
+function renderList() {
+  document.title = "Frosty – Downloads"; back.style.display = "none";
+  app.innerHTML = `
+    <div class="intro"><h2>Download Frosty</h2><p>Choose your device to get the latest build and any extra images it needs.</p></div>
+    <label class="field"><svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+    <input id="q" type="search" placeholder="Search by name or codename" autocomplete="off" aria-label="Search devices"></label>
+    <div id="list"></div>`;
+  const draw = () => {
+    const raw = $("#q").value.trim(), q = raw.toLowerCase();
+    const hits = DEVICES.filter(d => !q || d.name.toLowerCase().includes(q) || d.codename.includes(raw) || d.brand.toLowerCase().includes(q));
+    if (!hits.length) { $("#list").innerHTML = '<div class="empty">No devices match your search.</div>'; return; }
+    const brands = [...new Set(hits.map(d => d.brand))].sort();
+    $("#list").innerHTML = brands.map(b => `
+      <div class="group-title">${esc(b)}</div>
+      <div class="card">${hits.filter(d => d.brand === b).sort((x, y) => x.name.localeCompare(y.name, undefined, { numeric: true })).map(d => `
+        <a class="item" href="#${esc(d.codename)}">
+          <div class="avatar">${esc(d.name[0])}</div>
+          <div class="t"><b>${esc(d.name)}</b><span>${esc(d.codename)}</span></div>${chev}
+        </a>`).join("")}</div>`).join("");
+  };
+  $("#q").addEventListener("input", draw); draw();
+}
+
+/* ---------- Device detail ---------- */
+async function renderDevice(codename) {
+  const dev = DEVICES.find(d => d.codename === codename);
+  if (!dev) { location.hash = ""; return; }
+  document.title = `Frosty – ${dev.name}`; back.style.display = "grid";
+  app.innerHTML = `
+    <div class="dev-head"><div class="avatar">${esc(dev.name[0])}</div>
+      <div><h2>${esc(dev.name)}</h2><code>${esc(dev.codename)}</code></div></div>
+    <div id="out"></div>`;
+  progress.classList.add("on");
+  const out = $("#out");
+  try {
+    const res = await fetch(`${API}${encodeURIComponent(codename)}.json`, { cache: "no-cache" });
+    if (!res.ok) throw new Error(`The server returned ${res.status}.`);
+    const builds = await res.json();
+    if (decodeURIComponent(location.hash.slice(1)) !== codename) return; // user navigated away
+    if (!Array.isArray(builds) || !builds.length) throw new Error("No builds have been published for this device yet.");
+    const b = builds.reduce((a, c) => (c.datetime > a.datetime ? c : a));
+    out.innerHTML = buildHTML(b);
+  } catch (e) {
+    out.innerHTML = `<div class="card err"><b>Couldn't load builds.</b><p>${esc(e.message)} Check your connection and try again.</p>
+      <button class="btn" onclick="route()">Retry</button></div>`;
+  } finally { progress.classList.remove("on"); }
+}
+
+function buildHTML(b) {
+  const files = b.files || [];
+  const [rom, ...extras] = files; // first file is always the ROM zip
+  const hash = f => `<span class="hash">SHA-256: ${esc(f.sha256)}</span>`;
+  const copyBtn = f => `<button class="btn" data-copy="${esc(f.sha256)}">Copy SHA-256</button>`;
+  return `
+  <div class="card build">
+    <div class="chips">
+      <span class="chip main">${esc(b.type || "Release")}</span>
+      <span class="chip">Version ${esc(b.version)}</span>
+      <span class="chip">${esc(b.date)}</span>
+      ${rom && rom.os_patch_level ? `<span class="chip">Security patch ${esc(rom.os_patch_level)}</span>` : ""}
+      ${rom && rom.os_sdk_level ? `<span class="chip">Android SDK ${esc(rom.os_sdk_level)}</span>` : ""}
+    </div>
+    ${rom ? `
+    <h3>${esc(rom.filename)}</h3>
+    <p class="meta">${fmtSize(rom.size)}</p>
+    <div class="actions">
+      <a class="btn raised" href="${esc(rom.url)}" download>${dl} Download ROM</a>
+      ${copyBtn(rom)}
+    </div>
+    <details><summary>Checksums</summary>${hash(rom)}<span class="hash">SHA-1: ${esc(rom.sha1)}</span></details>` : '<p>This build has no ROM file.</p>'}
+  </div>
+  ${extras.length ? `
+  <div class="sub">Extra images</div>
+  <div class="card">${extras.map(f => `
+    <div class="img-row">
+      <div class="t"><b>${esc(f.filename)}</b><span>${fmtSize(f.size)}</span></div>
+      <a class="btn" href="${esc(f.url)}" download>${dl} Download</a>
+      ${copyBtn(f)}
+    </div>`).join("")}</div>
+  <p class="note">Extra images are for flashing with fastboot during installation or recovery. Verify the checksum before flashing.</p>` : ""}`;
+}
+
+/* ---------- Routing ---------- */
+function route() {
+  if (!DEVICES.length) return; // config not loaded yet
+  const id = decodeURIComponent(location.hash.slice(1));
+  window.scrollTo(0, 0);
+  id ? renderDevice(id) : renderList();
+}
+window.addEventListener("hashchange", route);
+back.addEventListener("click", () => { location.hash = ""; });
+app.addEventListener("click", e => { const c = e.target.closest("[data-copy]"); if (c) copy(c.dataset.copy); });
+loadConfig().then(route).catch(e => {
+  app.innerHTML = `<div class="card err"><b>Couldn't load config.json.</b><p>${esc(e.message)}</p></div>`;
+});
+</script>
+</body>
+</html>

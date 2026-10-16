@@ -1,0 +1,11 @@
+{
+  "api": "https://frosty.b-cdn.net/json/ananas/",
+  "devices": [
+    { "codename": "FP6", "brand": "Fairphone", "name": "The Fairphone (Gen 6)" },
+    { "codename": "bluejay", "brand": "Google", "name": "Pixel 6a" },
+    { "codename": "cheetah", "brand": "Google", "name": "Pixel 7 Pro" },
+    { "codename": "panther", "brand": "Google", "name": "Pixel 7" },
+    { "codename": "kane", "brand": "Motorola", "name": "one vision" },
+    { "codename": "miami", "brand": "Motorola", "name": "edge 30 neo" }
+  ]
+}
